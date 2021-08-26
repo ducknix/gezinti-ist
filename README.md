@@ -1,2 +1,2 @@
-# gezinti-ist
-Gezinti.ist Web Suncusu Kaynak Kodları
+# Gezinti.ist
+## Çevrenizi keşfedin.

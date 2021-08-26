@@ -1,0 +1,12 @@
+{
+    "login_btn" : "Sign In",
+    "register_btn" : "Sign Up",
+    "login_url" : "/en/signin",
+    "register_url" : "/en/signup",
+    "page_title" : "Gezinti.ist | Explore your city",
+    "docs_btn" : "Documents",
+    "main_text_title" : "",
+    "main_text" : "",
+    "learn_btn" : "Learn more",
+    "main_page" : "/en"
+}

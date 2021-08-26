@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width inital-scale=1">
+        <title>{{page_title}}</title>
+        <style>
+            .banner {
+                width: 100%;
+                height: 100vh;
+                background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.70)), url("{{random_bg_photo}}");
+                background-size: cover;
+                background-position: center;
+            }
+        </style>
+        <link rel="stylesheet" href="/public/css/style.css">
+    </head>
+
+    <body>
+        <div class="banner no-selection">
+            <div class="navbar">
+                <div class="logo"><a href="{{main_page}}">Gezinti<span>.ist</span></a></div>
+                <ul>
+                    <li><a href="{{login_url}}">{{login_btn}}</a></li>
+                    <li><a href="{{register_url}}">{{register_btn}}</a></li>
+                    <li><a href="">{{docs_btn}}</a></li>
+                    <li><a href="">Github</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content no-selection">
+            <div class="userpanel">
+                <form action="" class="form">
+                    <h2 class="formly">{{login_btn}}</h2>
+
+                    <div class="input-group">
+                        <input type="text" name="usermail" id="usermail" required>
+                        <label for="usermail">{{mail_text}}</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" id="password" required>
+                        <label for="password">{{pass_text}}</label>
+                    </div>
+                    <input type="submit" value="{{login_btn}}" class="learn_btn learn_btn_ly">
+                </form>
+            </div>
+
+        </div>
+
+    </body>
+
+</html>

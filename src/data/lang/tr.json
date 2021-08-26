@@ -1,0 +1,18 @@
+{
+    "login_btn" : "Giriş Yap",
+    "register_btn" : "Kayıt Ol",
+    "login_url" : "/giris",
+    "register_url" : "/kayit",
+    "page_title" : "Gezinti.ist | Şehrinizi keşfedin",
+    "docs_btn" : "Dökümanlar",
+    "main_text_title" : "Yüzlerce mekan, binlerce yol, milyonlarca insan ...",
+    "main_text" : "Görülecek, aşılacak ve yaşanacak çok yer var. Keşfetmeye etrafından başla.",
+    "learn_btn" : "Daha fazlasını öğren",
+    "main_page" : "/",
+    "mail_text" : "E-Posta",
+    "pass_text" : "Parola",
+    "forget_text" : "Parolamı unuttum",
+    "forget_btn" : "Talep gönder",
+    "pw_reset_text" : "Parolamı Unuttum",
+    "passwd_reset_url" : "/giris-yardim"
+}

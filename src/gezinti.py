@@ -16,6 +16,7 @@ settings = {
 
 def main():
     gezinti = Flask(**settings)
+    gezinti.secret_key = 'secret_key4debug'
 
     # blueprints being registered
     gezinti.register_blueprint(blueprint=index.IndexRoute.bp)  # file: /

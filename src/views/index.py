@@ -4,7 +4,8 @@
 from flask import (
     Blueprint,
     request,
-    render_template
+    render_template,
+    redirect
 )
 
 from scripts import check
@@ -51,53 +52,68 @@ class IndexRoute():
 
     @bp.route('/')
     def index() -> str:
-        tr_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+        tr_pack.update(
+            {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+
         return render_template("index.html", **tr_pack)
 
     @bp.route('/giris', methods=['GET', 'POST'])
     def signin() -> str:
         if request.method == 'GET':
-            tr_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+            tr_pack.update(
+                {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+
             return render_template("login.html", **tr_pack)
-        
+
         elif request.method == 'POST':
             usermail = request.form['usermail']
             password = request.form['password']
-            
+
             return usermail + " " + password
 
     @bp.route('/kayit', methods=['GET', 'POST'])
     def signup() -> str:
         if request.method == 'GET':
-            tr_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+
+            tr_pack.update(
+                {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+
             return render_template("register.html", **tr_pack)
-        
+
         elif request.method == 'POST':
             usermail = request.form['usermail']
             password = request.form['password']
             phonenum = request.form['phonenumber']
             username = request.form['username']
-            
+
             async def control():
-                UMOK = await check.check_email(usermail)
-                UNOK = await check.check_invalidchars(username)
-                PNOK = await check.check_invalidchars(phonenum)
-                PNOK = await check.check_phonenum(phonenum)
-                PSOK = await check.check_password(password)
-                
-                if (not PSOK):
-                    return "Hatalı parola"
-                
-                elif (not PNOK):
-                    return "Hatalı telefon"
-                
-                elif (not UNOK):
-                    return "Hatalı isim"
-                
-                elif (not UMOK):
-                    return "Hatalı kullanıcı mail"
-                
+                if (not await check.check_password(password)):
+                    return redirect('/kayit/hata/100', 302)
+
+                elif (not await check.check_phonenum(phonenum)):
+                    return redirect('/kayit/hata/101', 302)
+
+                elif (not await check.check_invalidchars(username)):
+                    return redirect('/kayit/hata/102', 302)
+
+                elif (not await check.check_invalidchars(usermail)):
+                    return redirect('/kayit/hata/103', 302)
+
                 else:
+                    # Kayıt işlemi veri tabanına geçilecek
                     return "All is well"
-                
+
         return asyncio.run(control())
+
+    @bp.route('/kayit/hata/<errcode>')
+    def signuperr(errcode) -> str:
+        try:
+            errmsg = tr_pack['error_msgs'][errcode]
+        except KeyError:
+            return redirect('/')
+
+        tr_pack.update(
+                {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+        tr_pack.update({"err_msg": errmsg})
+
+        return render_template("register-err.html", **tr_pack)

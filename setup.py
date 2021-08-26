@@ -11,12 +11,14 @@ setup(
     version="1.0",
     description="Çevrenizi keşfedin",
     long_description=long_description,
-    author = "Özgür Savaş (@ducknix)",
-    author_email = "touch00xf@gmail.com",
+    author="Özgür Savaş (@ducknix)",
+    author_email="touch00xf@gmail.com",
     license="Unlicense",
     packages=[
         "Flask",
-        "geopy"
+        "geopy",
+        "mysql-connector-python"
     ],
-    ext_modules=cythonize("src/*.pyx", build_dir="build")
+    ext_modules=cythonize(["src/views/*.pyx", "src/scripts/*.pyx"],
+                          build_dir="build")
 )

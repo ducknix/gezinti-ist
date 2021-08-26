@@ -20,5 +20,12 @@
     "github_url": "https://github.com/ducknix/gezinti-ist",
     "github_wiki_url" : "https://github.com/ducknix/gezinti-ist/wiki",
     "name_txt" : "İsim-Soyisim",
-    "phone_number_txt" : "Telefon Numarası"
+    "phone_number_txt" : "Telefon Numarası",
+    "error_msgs" : {
+        "100" : "Parolanız yeterince güçlü değil. Lütfen 12 karakterden büyük; en az bir büyük harf, rakam ve sembol içeren bir parola oluşturunuz.",
+        "101" : "Geçerli olmayan bir telefon numarası girdiniz. Lütfen Türkiye Cumhuriyeti onaylı gerçek bir telefon numarası giriniz.",
+        "102" : "İsminiz geçersiz karakterler içermekte. Lütfen Türk alfabesi, 'X' ve 'Q' harfleri dışında karakter kullanmayın.",
+        "103" : "E-Posta adresiniz geçersiz karakterler içermekte. Lütfen gerçek ve uygun bir e-posta adresi giriniz.",
+        "104" : "E-Posta adresiniz tanıdığımız bir adres gibi gözükmüyor. İleti sağlayıcınız incelencektir. Eğer kaydınız onaylanır ise bir ileti alacaksınız." 
+    }
 }

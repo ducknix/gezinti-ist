@@ -2,7 +2,7 @@
 # coding: utf-8
 
 from flask import Flask, send_from_directory
-from views import index, user, geo
+from views import index, user, api
 
 import os.path
 
@@ -20,7 +20,6 @@ def main():
     # blueprints being registered
     gezinti.register_blueprint(blueprint=index.IndexRoute.bp)  # file: /
     gezinti.register_blueprint(blueprint=user.UserRoute.bp)  # file: /user/
-    gezinti.register_blueprint(blueprint=geo.GeoRoute.bp)  # file: /geo/
 
     # setting favicon access route
     @gezinti.route('/favicon.ico')

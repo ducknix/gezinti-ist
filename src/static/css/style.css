@@ -61,6 +61,10 @@
     transition: 0.5s;
 }
 
+.navbar ul li.lang::after {
+    background: rgb(214, 214, 214);
+}
+
 .navbar ul li:hover::after {
     width: 100%;
 }

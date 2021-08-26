@@ -24,16 +24,27 @@
                 <ul>
                     <li><a href="{{login_url}}">{{login_btn}}</a></li>
                     <li><a href="{{register_url}}">{{register_btn}}</a></li>
-                    <li><a href="">{{docs_btn}}</a></li>
-                    <li><a href="">Github</a></li>
+                    <li><a href="{{github_wiki_url}}" target="_blank">{{docs_btn}}</a></li>
+                    <li><a href="{{github_url}}" target="_blank">Github</a></li>
+                    <li class="lang"><a href="{{cross_lang}}">{{lang_pref}}</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="content no-selection">
+        <div class="content no-selection" style="margin-top: 50px;">
             <div class="userpanel">
-                <form action="" class="form">
-                    <h2 class="formly">{{login_btn}}</h2>
+                <form action="{{register_url}}" class="form" method="POST">
+                    <h2 class="formly">{{register_btn}}</h2>
+
+                    <div class="input-group">
+                        <input type="text" name="username" id="username" required>
+                        <label for="username">{{name_txt}}</label>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="tel" name="phonenumber" id="phonenumber" pattern="+90 [0-9]{3} [0-9]{3} [0-9]{4}" maxlength="13" required>
+                        <label for="phonenumber">{{phone_number_txt}}</label>
+                    </div>
 
                     <div class="input-group">
                         <input type="text" name="usermail" id="usermail" required>
@@ -43,7 +54,7 @@
                         <input type="password" name="password" id="password" required>
                         <label for="password">{{pass_text}}</label>
                     </div>
-                    <input type="submit" value="{{login_btn}}" class="learn_btn learn_btn_ly">
+                    <input type="submit" value="{{register_btn}}" class="learn_btn learn_btn_ly">
                 </form>
             </div>
 

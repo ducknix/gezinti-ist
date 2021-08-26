@@ -24,15 +24,16 @@
                 <ul>
                     <li><a href="{{login_url}}">{{login_btn}}</a></li>
                     <li><a href="{{register_url}}">{{register_btn}}</a></li>
-                    <li><a href="">{{docs_btn}}</a></li>
-                    <li><a href="">Github</a></li>
+                    <li><a href="{{github_wiki_url}}" target="_blank">{{docs_btn}}</a></li>
+                    <li><a href="{{github_url}}" target="_blank">Github</a></li>
+                    <li class="lang"><a href="{{cross_lang}}">{{lang_pref}}</a></li>
                 </ul>
             </div>
         </div>
 
         <div class="content no-selection">
             <div class="userpanel">
-                <form action="" class="form">
+                <form action="{{login_url}}" class="form" method="POST">
                     <h2 class="formly">{{login_btn}}</h2>
 
                     <div class="input-group">

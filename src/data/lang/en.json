@@ -5,8 +5,20 @@
     "register_url" : "/en/signup",
     "page_title" : "Gezinti.ist | Explore your city",
     "docs_btn" : "Documents",
-    "main_text_title" : "",
-    "main_text" : "",
+    "main_text_title" : "Hundreds of places, thousands of roads, millions of people...",
+    "main_text" : "There are many places to see, visit and live. Start exploring around.",
     "learn_btn" : "Learn more",
-    "main_page" : "/en"
+    "main_page" : "/en",
+    "cross_lang" : "/",
+    "lang_pref" : "Türkçe",
+    "mail_text" : "E-Mail",
+    "pass_text" : "Password",
+    "forget_text" : "I'm forget my password",
+    "forget_btn" : "Send request",
+    "pw_reset_text" : "Forget Password",
+    "passwd_reset_url" : "/sign-help",
+    "github_url": "https://github.com/ducknix/gezinti-ist",
+    "github_wiki_url" : "https://github.com/ducknix/gezinti-ist/wiki",
+    "name_txt" : "Name-Surname",
+    "phone_number_txt" : "Phone Number"
 }

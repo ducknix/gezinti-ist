@@ -7,9 +7,11 @@ from flask import (
     render_template
 )
 
+from scripts import check
 
 import json
 import random
+import asyncio
 
 with open('./data/lang/tr.json', "r") as stream:
     tr_stream = stream.read()
@@ -34,10 +36,12 @@ class IndexRouteEn():
 
     @bp.route('/signin')
     def signin() -> str:
+        en_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
         return render_template("login.html", **en_pack)
 
     @bp.route('/signup')
     def signup() -> str:
+        en_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
         return render_template("register.html", **en_pack)
 
 
@@ -50,12 +54,50 @@ class IndexRoute():
         tr_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
         return render_template("index.html", **tr_pack)
 
-    @bp.route('/giris')
+    @bp.route('/giris', methods=['GET', 'POST'])
     def signin() -> str:
-        tr_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
-        return render_template("login.html", **tr_pack)
+        if request.method == 'GET':
+            tr_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+            return render_template("login.html", **tr_pack)
+        
+        elif request.method == 'POST':
+            usermail = request.form['usermail']
+            password = request.form['password']
+            
+            return usermail + " " + password
 
-    @bp.route('/kayit')
+    @bp.route('/kayit', methods=['GET', 'POST'])
     def signup() -> str:
-        tr_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
-        return render_template("register.html", **tr_pack)
+        if request.method == 'GET':
+            tr_pack.update({"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+            return render_template("register.html", **tr_pack)
+        
+        elif request.method == 'POST':
+            usermail = request.form['usermail']
+            password = request.form['password']
+            phonenum = request.form['phonenumber']
+            username = request.form['username']
+            
+            async def control():
+                UMOK = await check.check_email(usermail)
+                UNOK = await check.check_invalidchars(username)
+                PNOK = await check.check_invalidchars(phonenum)
+                PNOK = await check.check_phonenum(phonenum)
+                PSOK = await check.check_password(password)
+                
+                if (not PSOK):
+                    return "Hatalı parola"
+                
+                elif (not PNOK):
+                    return "Hatalı telefon"
+                
+                elif (not UNOK):
+                    return "Hatalı isim"
+                
+                elif (not UMOK):
+                    return "Hatalı kullanıcı mail"
+                
+                else:
+                    return "All is well"
+                
+        return asyncio.run(control())

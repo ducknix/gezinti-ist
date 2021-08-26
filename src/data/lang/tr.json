@@ -9,10 +9,16 @@
     "main_text" : "Görülecek, aşılacak ve yaşanacak çok yer var. Keşfetmeye etrafından başla.",
     "learn_btn" : "Daha fazlasını öğren",
     "main_page" : "/",
+    "cross_lang" : "/en",
+    "lang_pref" : "English",
     "mail_text" : "E-Posta",
     "pass_text" : "Parola",
     "forget_text" : "Parolamı unuttum",
     "forget_btn" : "Talep gönder",
     "pw_reset_text" : "Parolamı Unuttum",
-    "passwd_reset_url" : "/giris-yardim"
+    "passwd_reset_url" : "/giris-yardim",
+    "github_url": "https://github.com/ducknix/gezinti-ist",
+    "github_wiki_url" : "https://github.com/ducknix/gezinti-ist/wiki",
+    "name_txt" : "İsim-Soyisim",
+    "phone_number_txt" : "Telefon Numarası"
 }

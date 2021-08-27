@@ -8,7 +8,7 @@ from flask import (
     redirect
 )
 
-from scripts import check
+from scripts import check, sql
 
 import json
 import random
@@ -101,7 +101,10 @@ class IndexRoute():
 
                 else:
                     # Kayıt işlemi veri tabanına geçilecek
-                    return "All is well"
+                    if (sql.add_user(username, password, phonenum, usermail)):
+                        return redirect('/kayit/basarili', 302)
+
+                    return redirect('/kayit/hata/105', 302)
 
         return asyncio.run(control())
 
@@ -114,6 +117,19 @@ class IndexRoute():
 
         tr_pack.update(
                 {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
-        tr_pack.update({"err_msg": errmsg})
+        tr_pack.update({"status_msg": errmsg})
 
-        return render_template("register-err.html", **tr_pack)
+        return render_template("register.html", **tr_pack)
+
+    @bp.route('/kayit/<msg>')
+    def signsuccess(msg) -> str:
+        try:
+            msg = tr_pack["success_msg"][msg]
+        except KeyError:
+            redirect('/')
+
+        tr_pack.update(
+                {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+        tr_pack.update(
+            {"status_msg": msg})
+        return render_template("login.html", **tr_pack)

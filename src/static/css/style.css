@@ -95,6 +95,17 @@
     margin-top: 10px;
 }
 
+.content.error {
+    width: 100%;
+    position: absolute;
+    top: 21%;
+    text-align: center;
+    font-style: normal;
+    text-align: center;
+    color: #fff;
+    font-size: 12px;
+}
+
 .learn_btn {
     font-family: 'Open Sans', sans-serif;
     width: 200px;

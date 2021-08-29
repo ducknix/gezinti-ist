@@ -5,7 +5,8 @@ from flask import (
     Blueprint,
     request,
     render_template,
-    redirect
+    redirect,
+    make_response
 )
 
 from scripts import check, sql
@@ -55,7 +56,9 @@ class IndexRoute():
         tr_pack.update(
             {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
 
-        return render_template("index.html", **tr_pack)
+        res = make_response(render_template("index.html", **tr_pack))
+
+        return res
 
     @bp.route('/giris', methods=['GET', 'POST'])
     def signin() -> str:
@@ -63,7 +66,9 @@ class IndexRoute():
             tr_pack.update(
                 {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
 
-            return render_template("login.html", **tr_pack)
+            res = make_response(render_template("login.html", **tr_pack))
+
+            return res
 
         elif request.method == 'POST':
             usermail = request.form['usermail']
@@ -78,13 +83,18 @@ class IndexRoute():
             tr_pack.update(
                 {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
 
-            return render_template("register.html", **tr_pack)
+            res = make_response(render_template("register.html", **tr_pack))
+
+            return res
 
         elif request.method == 'POST':
             usermail = request.form['usermail']
             password = request.form['password']
             phonenum = request.form['phonenumber']
             username = request.form['username']
+            
+            if (False):
+                return redirect('/kayit/hata')
 
             async def control():
                 if (not await check.check_password(password)):
@@ -119,7 +129,9 @@ class IndexRoute():
                 {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
         tr_pack.update({"status_msg": errmsg})
 
-        return render_template("register.html", **tr_pack)
+        res = make_response(render_template("register.html", **tr_pack))
+
+        return res
 
     @bp.route('/kayit/<msg>')
     def signsuccess(msg) -> str:
@@ -132,4 +144,6 @@ class IndexRoute():
                 {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
         tr_pack.update(
             {"status_msg": msg})
-        return render_template("login.html", **tr_pack)
+
+        res = make_response(render_template("login.html", **tr_pack))
+        return res

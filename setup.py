@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+
 from setuptools import setup
 from Cython.Build import cythonize
 
@@ -17,7 +18,8 @@ setup(
     packages=[
         "Flask",
         "geopy",
-        "mysql-connector-python"
+        "mysql-connector-python",
+        "pycryptodome"
     ],
     ext_modules=cythonize(["src/views/*.pyx", "src/scripts/*.pyx"],
                           build_dir="build")

@@ -27,7 +27,8 @@
         "102" : "İsminiz geçersiz karakterler içermekte. Lütfen Türk alfabesi, 'X' ve 'Q' harfleri dışında karakter kullanmayın.",
         "103" : "E-Posta adresiniz geçersiz karakterler içermekte. Lütfen gerçek ve uygun bir e-posta adresi giriniz.",
         "104" : "E-Posta adresiniz tanıdığımız bir adres gibi gözükmüyor. İleti sağlayıcınız incelencektir. Eğer kaydınız onaylanır ise bir ileti alacaksınız.",
-        "105" : "Teknik bir arıza var gibi gözüküyor. Lütfen daha sonra tekrar deneyin."
+        "105" : "Teknik bir arıza var gibi gözüküyor. Lütfen daha sonra tekrar deneyin.",
+        "106" : "E-Posta ve ya telefon numarası zaten kayıtlı gözükmekte. Giriş yapamıyorsanız \"Şifremi Unuttum\" kısmından tekrar şifre alabilirsiniz."
     },
     "success_msg" : {
         "basarili" : "Kayıt başarıyla oluşturuldu."  

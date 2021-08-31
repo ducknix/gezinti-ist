@@ -15,6 +15,8 @@ import json
 import random
 import asyncio
 
+from scripts.crypt import aes_decrypt, aes_encrypt
+
 with open('./data/lang/tr.json', "r") as stream:
     tr_stream = stream.read()
     tr_pack = json.loads(tr_stream)
@@ -67,18 +69,66 @@ class IndexRoute():
                 {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
 
             res = make_response(render_template("login.html", **tr_pack))
-
             return res
 
         elif request.method == 'POST':
             usermail = request.form['usermail']
             password = request.form['password']
 
-            return usermail + " " + password
+            def control():
+                enc_usermail = aes_encrypt(usermail, '', '', None)
+                enc_password = aes_encrypt(password, usermail, password, None)
+
+                db_data = sql.collect_user(enc_usermail, enc_password)
+
+                # email var mı kontrol et varsa parola uyuyor mu
+                if (sql.sign_check_user(enc_usermail, enc_password)):
+                    pass
+                else:
+                    return redirect('/giris/hata/107', 302)
+
+                res = make_response(redirect('/user'))
+
+                res.set_cookie("usermail", usermail)
+                res.set_cookie("password", enc_password)
+
+                res.set_cookie(
+                    "username",
+                    aes_decrypt(db_data[0], usermail, password, None)
+                    )
+
+                res.set_cookie(
+                    "phonenum", aes_decrypt(db_data[2], usermail, password, None)
+                )
+
+                return res
+
+            return control()
+
+    @bp.route('/giris/hata/<errcode>')
+    def signinerr(errcode) -> str:
+        try:
+            errmsg = tr_pack['error_msgs'][errcode]
+        except KeyError:
+            return redirect('/')
+
+        tr_pack.update(
+                {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
+        tr_pack.update({"status_msg": errmsg})
+
+        res = make_response(render_template("login.html", **tr_pack))
+
+        return res
 
     @bp.route('/kayit', methods=['GET', 'POST'])
     def signup() -> str:
         if request.method == 'GET':
+
+            cookie_usermail = request.cookies.get('usermail')
+            cookie_password = request.cookies.get('password')
+
+            if (sql.sign_check_user(cookie_usermail, cookie_password)):
+                return redirect('/user', 300)
 
             tr_pack.update(
                 {"random_bg_photo": f"/public/res/bg/{bg_code()}.png"})
@@ -92,9 +142,6 @@ class IndexRoute():
             password = request.form['password']
             phonenum = request.form['phonenumber']
             username = request.form['username']
-            
-            if (False):
-                return redirect('/kayit/hata')
 
             async def control():
                 if (not await check.check_password(password)):
@@ -108,6 +155,9 @@ class IndexRoute():
 
                 elif (not await check.check_invalidchars(usermail)):
                     return redirect('/kayit/hata/103', 302)
+
+                elif (sql.reg_check_user(usermail, phonenum)):
+                    return
 
                 else:
                     # Kayıt işlemi veri tabanına geçilecek

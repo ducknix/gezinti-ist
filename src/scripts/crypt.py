@@ -8,15 +8,18 @@ from Crypto.Hash import SHA512
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Util.Padding import pad, unpad
 
+from scripts.check import replace_char
+
 salt = b'\xe7\x00<\xb4\x97\x90\xd6`v\x89\xa6R\x18\x1d\x82\xbd'
 init_v = b'\xd2\xd1\xe2ys\x01\xb6>\x93\x069\x0b3^\xe6t'
 count = 5000  # default: 1000000
 
 
 def create_key(usermail: str, password: str):
-    master_key = usermail+password  # secret key for cipher_key
+    master_key = replace_char(usermail+password)  # secret key for cipher_key
+    print(master_key)
     return PBKDF2(master_key, salt, 32, count=count,
-                  hmac_hash_module=SHA512)  # cipher key
+                  hmac_hash_module=SHA512, )  # cipher key
 
 
 def aes_encrypt(data: str, usermail: str, password: str, que) -> str:
@@ -25,7 +28,9 @@ def aes_encrypt(data: str, usermail: str, password: str, que) -> str:
     data = pad(data.encode('utf-8'), 32)
     enc = aes.encrypt(data)
     base = base64.b32encode(enc).decode('utf-8')
-    que.put(base)
+    if not (que is None):
+        que.put(base)
+
     return base
 
 
@@ -35,5 +40,7 @@ def aes_decrypt(data: str, usermail: str, password: str, que) -> str:
     data = base64.b32decode(data, '')
     dec = aes.decrypt(data)
     base = unpad(dec, 32).decode('utf-8')
-    que.put(base)
+    if not (que is None):
+        que.put(base)
+
     return base

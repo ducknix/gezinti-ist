@@ -41,9 +41,15 @@ async def check_invalidchars(var: str) -> bool:
 
 
 async def check_password(password: str) -> bool:
-    pattern = '((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{12,128})'
+    p = '((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&İıĞğŞşÖöÇçÜü*]).{12,128})'
 
-    if not bool(re.match(pattern, password)):
+    if not bool(re.match(p, password)):
         return False
 
     return True
+
+
+def replace_char(data: str) -> str:  # kontrol edilecek
+    for i in ['ç', 'ı', 'ö', 'Ö' 'ç', 'Ç', 'ş', 'Ş', 'ğ', 'Ğ', 'ü', 'Ü', 'İ', 'Ö']:
+        data = data.replace(i, '#', -1)
+    return data

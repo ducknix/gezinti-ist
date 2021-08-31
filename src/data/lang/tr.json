@@ -28,7 +28,8 @@
         "103" : "E-Posta adresiniz geçersiz karakterler içermekte. Lütfen gerçek ve uygun bir e-posta adresi giriniz.",
         "104" : "E-Posta adresiniz tanıdığımız bir adres gibi gözükmüyor. İleti sağlayıcınız incelencektir. Eğer kaydınız onaylanır ise bir ileti alacaksınız.",
         "105" : "Teknik bir arıza var gibi gözüküyor. Lütfen daha sonra tekrar deneyin.",
-        "106" : "E-Posta ve ya telefon numarası zaten kayıtlı gözükmekte. Giriş yapamıyorsanız \"Şifremi Unuttum\" kısmından tekrar şifre alabilirsiniz."
+        "106" : "E-Posta ve ya telefon numarası zaten kayıtlı gözükmekte. Giriş yapamıyorsanız \"Şifremi Unuttum\" kısmından tekrar şifre alabilirsiniz.",
+        "107" : "E-Posta veya parola uyuşmuyor. Eğer şifrenizi unuttuysanız \"Şifremi Unuttum\" sayfasından parolanızı yenileyebilirsiniz."
     },
     "success_msg" : {
         "basarili" : "Kayıt başarıyla oluşturuldu."  

@@ -2,6 +2,8 @@ from flask import (Blueprint)
 
 import json
 
+from werkzeug.wrappers import request
+
 with open('./data/lang/tr.json', "r") as stream:
     tr_stream = stream.read()
     tr_pack = json.loads(tr_stream)
@@ -16,4 +18,4 @@ class UserRoute():
 
     @bp.route('/')
     def index() -> str:
-        return "Hello from user"
+        return request.cookies.get("phonenum")
